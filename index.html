@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Японские ножи — мастерство самураев</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #0a0a0a;
+            color: #e8e0d8;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Шапка */
+        .header {
+            background: linear-gradient(180deg, #0f0f0f 0%, #1a1410 100%);
+            padding: 20px 0;
+            border-bottom: 2px solid #b8860b;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #f5e6c8;
+        }
+
+        .logo span {
+            color: #b8860b;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* Герой-секция */
+        .hero {
+            padding: 60px 0 40px;
+            background: radial-gradient(ellipse at 30% 20%, #1a1410 0%, #0a0a0a 70%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '⚔️';
+            position: absolute;
+            right: -50px;
+            top: -50px;
+            font-size: 300px;
+            opacity: 0.04;
+            transform: rotate(15deg);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #f5e6c8 0%, #b8860b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: #b8ada0;
+            margin-bottom: 30px;
+            max-width: 500px;
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image .knife-icon {
+            font-size: 180px;
+            filter: drop-shadow(0 20px 40px rgba(184, 134, 11, 0.3));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Кнопки */
+        .btn {
+            display: inline-block;
+            padding: 14px 34px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #b8860b, #daa520);
+            color: #0a0a0a;
+            box-shadow: 0 8px 25px rgba(184, 134, 11, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 35px rgba(184, 134, 11, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #e8e0d8;
+            border: 2px solid #b8860b;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(184, 134, 11, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .btn-dark {
+            background: #1a1a1a;
+            color: #e8e0d8;
+            border: 1px solid #333;
+        }
+
+        .btn-dark:hover {
+            background: #2a2a2a;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: #2d7d46;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #3a9b5a;
+            transform: translateY(-2px);
+        }
+
+        .btn-small {
+            padding: 8px 20px;
+            font-size: 0.85rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        /* Каталог */
+        .catalog {
+            padding: 60px 0;
+            background: #0f0f0f;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #f5e6c8;
+        }
+
+        .section-title span {
+            color: #b8860b;
+        }
+
+        .knife-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+
+        .knife-card {
+            background: #1a1614;
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid #2a2420;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .knife-card:hover {
+            transform: translateY(-8px);
+            border-color: #b8860b;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .knife-card .emoji {
+            font-size: 70px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .knife-card h3 {
+            font-size: 1.2rem;
+            color: #f5e6c8;
+            margin-bottom: 5px;
+        }
+
+        .knife-card .desc {
+            font-size: 0.9rem;
+            color: #998e82;
+            margin: 8px 0 12px;
+        }
+
+        .knife-card .price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #daa520;
+            margin-bottom: 15px;
+        }
+
+        .knife-card .btn {
+            width: 100%;
+        }
+
+        /* Блок о нас */
+        .about {
+            padding: 60px 0;
+            background: #0a0a0a;
+            border-top: 1px solid #1a1410;
+            border-bottom: 1px solid #1a1410;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #f5e6c8;
+        }
+
+        .about-text p {
+            color: #b8ada0;
+            margin-bottom: 15px;
+        }
+
+        .about-icons {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .about-icons span {
+            filter: grayscale(0.4);
+            transition: 0.3s;
+        }
+
+        .about-icons span:hover {
+            filter: grayscale(0);
+            transform: scale(1.1);
+        }
+
+        /* Корзина / уведомления */
+        .cart-bar {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #1a1614;
+            border: 1px solid #b8860b;
+            border-radius: 60px;
+            padding: 12px 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            z-index: 200;
+        }
+
+        .cart-bar span {
+            font-size: 1.1rem;
+            color: #f5e6c8;
+        }
+
+        .cart-bar .count {
+            background: #b8860b;
+            color: #0a0a0a;
+            padding: 2px 12px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        /* Уведомление */
+        .toast {
+            position: fixed;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1614;
+            border: 1px solid #b8860b;
+            padding: 16px 32px;
+            border-radius: 60px;
+            color: #f5e6c8;
+            font-weight: 500;
+            z-index: 300;
+            opacity: 0;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            pointer-events: none;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Футер */
+        .footer {
+            padding: 30px 0;
+            text-align: center;
+            color: #665a4e;
+            font-size: 0.9rem;
+            border-top: 1px solid #1a1410;
+        }
+
+        /* Адаптив */
+        @media (max-width: 768px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-text p {
+                margin: 0 auto 25px;
+            }
+
+            .btn-group {
+                justify-content: center;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .header-inner {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cart-bar {
+                bottom: 15px;
+                right: 15px;
+                padding: 10px 18px;
+                font-size: 0.9rem;
+            }
+
+            .hero-image .knife-icon {
+                font-size: 100px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .knife-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .btn {
+                padding: 12px 24px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Шапка -->
+<header class="header">
+    <div class="container header-inner">
+        <div class="logo">⚔️ <span>KATANA</span>KNIFE</div>
+        <div class="nav-buttons">
+            <button class="btn btn-secondary btn-small" id="catalogBtn">📜 Каталог</button>
+            <button class="btn btn-secondary btn-small" id="aboutBtn">🏮 О нас</button>
+            <button class="btn btn-dark btn-small" id="contactBtn">✉️ Контакты</button>
+        </div>
+    </div>
+</header>
+
+<!-- Уведомление -->
+<div class="toast" id="toast">Добавлено в корзину 🛒</div>
+
+<!-- Герой -->
+<section class="hero">
+    <div class="container hero-grid">
+        <div class="hero-text">
+            <h1>Искусство японского клинка</h1>
+            <p>Традиционные ножи ручной работы из высокоуглеродистой стали. Острота, баланс и эстетика самураев.</p>
+            <div class="btn-group">
+                <button class="btn btn-primary" id="buyNowBtn">🔥 Купить сейчас</button>
+                <button class="btn btn-secondary" id="catalogBtn2">Смотреть каталог</button>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="knife-icon">🗡️</div>
+        </div>
+    </div>
+</section>
+
+<!-- Каталог -->
+<section class="catalog" id="catalogSection">
+    <div class="container">
+        <h2 class="section-title">Наши <span>ножи</span></h2>
+        <div class="knife-grid">
+            <!-- Карточка 1 -->
+            <div class="knife-card" data-id="1" data-name="Дайкай" data-price="18900">
+                <span class="emoji">🍣</span>
+                <h3>Дайкай (Дэба)</h3>
+                <p class="desc">Традиционный нож для разделки рыбы. Сталь VG-10, 63 слоя.</p>
+                <div class="price">18 900 ₽</div>
+                <button class="btn btn-success btn-small add-to-cart">В корзину</button>
+            </div>
+            <!-- Карточка 2 -->
+            <div class="knife-card" data-id="2" data-name="Сантоку" data-price="15900">
+                <span class="emoji">🥩</span>
+                <h3>Сантоку</h3>
+                <p class="desc">Универсальный нож для мяса и овощей. Сталь AUS-8.</p>
+                <div class="price">15 900 ₽</div>
+                <button class="btn btn-success btn-small add-to-cart">В корзину</button>
+            </div>
+            <!-- Карточка 3 -->
+            <div class="knife-card" data-id="3" data-name="Накири" data-price="13900">
+                <span class="emoji">🥬</span>
+                <h3>Накири</h3>
+                <p class="desc">Профессиональный нож для овощей. Плоское лезвие.</p>
+                <div class="price">13 900 ₽</div>
+                <button class="btn btn-success btn-small add-to-cart">В корзину</button>
+            </div>
+            <!-- Карточка 4 -->
+            <div class="knife-card" data-id="4" data-name="Сушикири" data-price="21900">
+                <span class="emoji">🍱</span>
+                <h3>Сушикири</h3>
+                <p class="desc">Специализированный нож для суши и роллов. Дамасская сталь.</p>
+                <div class="price">21 900 ₽</div>
+                <button class="btn btn-success btn-small add-to-cart">В корзину</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- О нас -->
+<section class="about" id="aboutSection">
+    <div class="container about-grid">
+        <div class="about-text">
+            <h2>🏯 Традиции кузнечного дела</h2>
+            <p>Наши мастера из города Сэки (префектура Гифу) сохраняют техники, которым более 700 лет. Каждый нож проходит ручную закалку и полировку.</p>
+            <p>Мы используем только высокоуглеродистую сталь и натуральные материалы для рукоятей.</p>
+            <button class="btn btn-primary" id="learnMoreBtn">Узнать больше</button>
+        </div>
+        <div class="about-icons">
+            <span>🔪</span>
+            <span>🪚</span>
+            <span>⚒️</span>
+            <span>✨</span>
+        </div>
+    </div>
+</section>
+
+<!-- Футер -->
+<footer class="footer">
+    <div class="container">
+        <p>© 2026 KATANAKNIFE — японские ножи ручной работы</p>
+        <p style="margin-top: 5px; font-size: 0.8rem;">Доставка по всей России · Гарантия 5 лет</p>
+    </div>
+</footer>
+
+<!-- Корзина (фиксированная) -->
+<div class="cart-bar" id="cartBar">
+    <span>🛒 Корзина</span>
+    <span class="count" id="cartCount">0</span>
+    <button class="btn btn-primary btn-small" id="checkoutBtn">Заказать</button>
+</div>
+
+<script>
+    (function() {
+        // ---- состояние ----
+        let cart = [];
+        let cartCount = 0;
+
+        // ---- DOM ----
+        const toast = document.getElementById('toast');
+        const cartCountEl = document.getElementById('cartCount');
+        const addButtons = document.querySelectorAll('.add-to-cart');
+
+        // ---- функции уведомлений ----
+        function showToast(message = 'Добавлено в корзину 🛒') {
+            toast.textContent = message;
+            toast.classList.add('show');
+            clearTimeout(toast._timer);
+            toast._timer = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+
+        function updateCartUI() {
+            cartCountEl.textContent = cart.length;
+            // сохраняем в localStorage для демонстрации
+            try {
+                localStorage.setItem('knifeCart', JSON.stringify(cart));
+            } catch(e) {}
+        }
+
+        // ---- добавление в корзину ----
+        addButtons.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const card = this.closest('.knife-card');
+                if (!card) return;
+
+                const id = card.dataset.id;
+                const name = card.dataset.name;
+                const price = parseInt(card.dataset.price);
+
+                const item = {
+                    id: id,
+                    name: name,
+                    price: price,
+                    timestamp: Date.now()
+                };
+
+                cart.push(item);
+                updateCartUI();
+                showToast(`✅ ${name} — в корзине!`);
+            });
+        });
+
+        // ---- кнопка "Купить сейчас" ----
+        document.getElementById('buyNowBtn').addEventListener('click', function() {
+            // Добавляем первый нож (Дайкай) как пример
+            const firstCard = document.querySelector('.knife-card');
+            if (firstCard) {
+                const name = firstCard.dataset.name;
+                const price = parseInt(firstCard.dataset.price);
+                cart.push({
+                    id: firstCard.dataset.id,
+                    name: name,
+                    price: price,
+                    timestamp: Date.now()
+                });
+                updateCartUI();
+                showToast(`🔥 ${name} добавлен!`);
+            } else {
+                showToast('⚠️ Ошибка, попробуйте позже');
+            }
+        });
+
+        // ---- кнопка "Заказать" (в корзине) ----
+        document.getElementById('checkoutBtn').addEventListener('click', function() {
+            if (cart.length === 0) {
+                showToast('🛒 Корзина пуста! Выберите нож');
+                return;
+            }
+
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            const names = cart.map(item => item.name).join(', ');
+            showToast(`📦 Заказ оформлен! (${cart.length} шт., сумма: ${total.toLocaleString()} ₽)`);
+
+            // Очищаем корзину через 2 секунды
+            setTimeout(() => {
+                cart = [];
+                updateCartUI();
+            }, 2500);
+        });
+
+        // ---- навигационные кнопки ----
+        document.getElementById('catalogBtn').addEventListener('click', function() {
+            document.getElementById('catalogSection').scrollIntoView({ behavior: 'smooth' });
+            showToast('📜 Каталог ножей');
+        });
+
+        document.getElementById('catalogBtn2').addEventListener('click', function() {
+            document.getElementById('catalogSection').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        document.getElementById('aboutBtn').addEventListener('click', function() {
+            document.getElementById('aboutSection').scrollIntoView({ behavior: 'smooth' });
+            showToast('🏯 Традиции кузнечного дела');
+        });
+
+        document.getElementById('contactBtn').addEventListener('click', function() {
+            showToast('✉️ Напишите нам: info@katanaknife.ru');
+        });
+
+        document.getElementById('learnMoreBtn').addEventListener('click', function() {
+            showToast('📖 Читайте наш блог о японских ножах');
+        });
+
+        // ---- восстановление корзины из localStorage ----
+        try {
+            const saved = localStorage.getItem('knifeCart');
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                if (Array.isArray(parsed) && parsed.length > 0) {
+                    cart = parsed;
+                    updateCartUI();
+                }
+            }
+        } catch(e) {}
+
+        // ---- инициализация ----
+        updateCartUI();
+
+        // ---- доп. эффект: клик по карточке ----
+        document.querySelectorAll('.knife-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const name = this.dataset.name;
+                showToast(`🔍 ${name} — отличный выбор!`);
+            });
+        });
+
+    })();
+</script>
+
+</body>
+</html>
